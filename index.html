@@ -46,6 +46,7 @@
             <nav>
                 <a href="#home" class="nav-link active" data-hover-3d>Home</a>
                 <a href="#features" class="nav-link" data-hover-3d>Features</a>
+                <a href="#preview" class="nav-link" data-hover-3d>Preview</a>
                 <a href="#download" class="nav-link" data-hover-3d>Download</a>
                 <a href="#contact" class="nav-link" data-hover-3d>Contact</a>
             </nav>
@@ -59,6 +60,7 @@
     <div class="mobile-nav" id="mobileNav">
         <a href="#home" class="nav-link">Home</a>
         <a href="#features" class="nav-link">Features</a>
+        <a href="#preview" class="nav-link">Preview</a>
         <a href="#download" class="nav-link">Download</a>
         <a href="#contact" class="nav-link">Contact</a>
     </div>
@@ -160,6 +162,83 @@
                     </div>
                     <div class="feature-line"></div>
                 </div>
+                <div class="feature-card" data-tilt data-tilt-max="8">
+                    <div class="feature-glow"></div>
+                    <div class="feature-content">
+                        <div class="feature-icon">
+                            <i class="fas fa-hand-pointer"></i>
+                        </div>
+                        <h3>Easy Accessibility</h3>
+                        <p>Intuitive and user-friendly interface designed for seamless navigation</p>
+                    </div>
+                    <div class="feature-line"></div>
+                </div>
+                <div class="feature-card" data-tilt data-tilt-max="8">
+                    <div class="feature-glow"></div>
+                    <div class="feature-content">
+                        <div class="feature-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3>Custom UI & Background</h3>
+                        <p>Fully customizable background and UI design to match your personal style</p>
+                    </div>
+                    <div class="feature-line"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preview Section -->
+    <section class="preview-section" id="preview">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">
+                    <i class="fas fa-image"></i>
+                    Preview
+                </span>
+                <h2 class="section-title">Executor Preview</h2>
+                <p class="section-desc">Take a look at our sleek and powerful executor</p>
+            </div>
+            
+            <div class="preview-container" data-tilt data-tilt-max="5">
+                <div class="preview-glow"></div>
+                <div class="preview-frame">
+                    <div class="preview-header">
+                        <div class="preview-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="preview-title">KS Executor v2.01</span>
+                        <div class="preview-actions">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                    </div>
+                    <div class="preview-image-wrapper">
+                        <img src="KS.png" alt="KS Executor Preview" class="preview-image" id="previewImage">
+                        <div class="image-glow"></div>
+                    </div>
+                </div>
+                <div class="preview-reflection"></div>
+            </div>
+
+            <div class="preview-features">
+                <div class="preview-feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Modern UI Design</span>
+                </div>
+                <div class="preview-feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Script Editor</span>
+                </div>
+                <div class="preview-feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Script Hub</span>
+                </div>
+                <div class="preview-feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Custom Themes</span>
+                </div>
             </div>
         </div>
     </section>
@@ -224,6 +303,9 @@
                             <span class="download-title">Download KS Executor</span>
                             <span class="download-subtitle">Version 2.01 • Windows Only</span>
                         </div>
+                        <div class="download-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
                     </a>
                     
                     <div class="download-note">
@@ -261,14 +343,14 @@
                                     <div class="api-stat">
                                         <span class="stat-label">SUNC</span>
                                         <div class="stat-bar">
-                                            <div class="stat-fill" style="width: 94%"></div>
+                                            <div class="stat-fill" data-width="94"></div>
                                         </div>
                                         <span class="stat-value">94%</span>
                                     </div>
                                     <div class="api-stat">
                                         <span class="stat-label">UNC</span>
                                         <div class="stat-bar">
-                                            <div class="stat-fill" style="width: 99%"></div>
+                                            <div class="stat-fill" data-width="99"></div>
                                         </div>
                                         <span class="stat-value">99%</span>
                                     </div>
@@ -289,7 +371,7 @@
                                     <div class="api-stat">
                                         <span class="stat-label">UNC</span>
                                         <div class="stat-bar">
-                                            <div class="stat-fill" style="width: 82%"></div>
+                                            <div class="stat-fill" data-width="82"></div>
                                         </div>
                                         <span class="stat-value">82%</span>
                                     </div>
