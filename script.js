@@ -19,11 +19,11 @@ document.addEventListener('mousemove', (e) => {
 });
 
 function animateCursor() {
-    cursorX += (mouseX - cursorX) * 0.2;
-    cursorY += (mouseY - cursorY) * 0.2;
+    cursorX += (mouseX - cursorX) * 0.15;
+    cursorY += (mouseY - cursorY) * 0.15;
     
-    followerX += (mouseX - followerX) * 0.1;
-    followerY += (mouseY - followerY) * 0.1;
+    followerX += (mouseX - followerX) * 0.08;
+    followerY += (mouseY - followerY) * 0.08;
     
     cursor.style.left = cursorX + 'px';
     cursor.style.top = cursorY + 'px';
@@ -36,7 +36,7 @@ function animateCursor() {
 
 animateCursor();
 
-const interactiveElements = document.querySelectorAll('a, button, [data-hover-3d], [data-tilt], .nav-link');
+const interactiveElements = document.querySelectorAll('a, button, [data-hover-3d], [data-tilt], .nav-link, input, textarea, .guide-step, .api-item, .preview-feature');
 
 interactiveElements.forEach(el => {
     el.addEventListener('mouseenter', () => {
@@ -260,6 +260,20 @@ function toggleAPI() {
     
     apiList.classList.toggle('show');
     toggleBtn.classList.toggle('active');
+    
+    // Animate stat bars when opened
+    if (apiList.classList.contains('show')) {
+        setTimeout(() => {
+            document.querySelectorAll('.stat-fill').forEach(fill => {
+                const width = fill.dataset.width;
+                fill.style.width = width + '%';
+            });
+        }, 100);
+    } else {
+        document.querySelectorAll('.stat-fill').forEach(fill => {
+            fill.style.width = '0';
+        });
+    }
 }
 
 // ==================== SCROLL ANIMATIONS ====================
@@ -282,39 +296,39 @@ const observer = new IntersectionObserver((entries) => {
 
 const style = document.createElement('style');
 style.textContent = `
-    .feature-card, .download-info-card, .social-card, .section-header {
+    .feature-card, .download-info-card, .social-card, .section-header, .preview-container {
         opacity: 0;
         transform: translateY(50px);
         transition: opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
                     transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-                    border-color 0.4s, box-shadow 0.4s;
+                    border-color 0.3s, box-shadow 0.3s;
     }
     
     .feature-card.visible, .download-info-card.visible, 
-    .social-card.visible, .section-header.visible {
+    .social-card.visible, .section-header.visible, .preview-container.visible {
         opacity: 1;
         transform: translateY(0);
     }
     
     .feature-card.tilt-ready,
     .download-info-card.tilt-ready,
-    .social-card.tilt-ready {
-        transition: border-color 0.4s, box-shadow 0.4s;
+    .social-card.tilt-ready,
+    .preview-container.tilt-ready {
+        transition: border-color 0.3s, box-shadow 0.3s;
     }
     
     .feature-card:nth-child(1) { transition-delay: 0s; }
     .feature-card:nth-child(2) { transition-delay: 0.1s; }
     .feature-card:nth-child(3) { transition-delay: 0.2s; }
     .feature-card:nth-child(4) { transition-delay: 0.3s; }
+    .feature-card:nth-child(5) { transition-delay: 0.4s; }
+    .feature-card:nth-child(6) { transition-delay: 0.5s; }
     
-    .feature-card:nth-child(1).tilt-ready { transition-delay: 0s; }
-    .feature-card:nth-child(2).tilt-ready { transition-delay: 0s; }
-    .feature-card:nth-child(3).tilt-ready { transition-delay: 0s; }
-    .feature-card:nth-child(4).tilt-ready { transition-delay: 0s; }
+    .feature-card.tilt-ready { transition-delay: 0s !important; }
 `;
 document.head.appendChild(style);
 
-document.querySelectorAll('.feature-card, .download-info-card, .social-card, .section-header').forEach(el => {
+document.querySelectorAll('.feature-card, .download-info-card, .social-card, .section-header, .preview-container').forEach(el => {
     observer.observe(el);
 });
 
@@ -358,6 +372,23 @@ document.addEventListener('mousemove', (e) => {
         shape.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${moveX}deg)`;
     });
 });
+
+// ==================== IMAGE ERROR HANDLING ====================
+const previewImage = document.getElementById('previewImage');
+if (previewImage) {
+    previewImage.addEventListener('error', function() {
+        this.style.display = 'none';
+        this.parentElement.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: center; height: 400px; background: rgba(0,0,0,0.3); color: var(--text-muted);">
+                <div style="text-align: center;">
+                    <i class="fas fa-image" style="font-size: 60px; margin-bottom: 20px; opacity: 0.5;"></i>
+                    <p>Image not found</p>
+                    <p style="font-size: 13px; opacity: 0.6;">Place "KS.png" in the same folder</p>
+                </div>
+            </div>
+        `;
+    });
+}
 
 // ==================== INIT ====================
 document.addEventListener('DOMContentLoaded', () => {
