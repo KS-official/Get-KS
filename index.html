@@ -13,14 +13,14 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
             color: #ffffff;
             overflow-x: hidden;
             min-height: 100vh;
         }
 
         /* Animated Background */
-        .bg-animation {
+        .background-animation {
             position: fixed;
             width: 100%;
             height: 100%;
@@ -30,114 +30,75 @@
             overflow: hidden;
         }
 
-        .bg-animation span {
+        .background-animation::before {
+            content: '';
             position: absolute;
-            display: block;
-            width: 20px;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            animation: float 25s infinite;
-            border-radius: 50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
         }
 
-        .bg-animation span:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .bg-animation span:nth-child(2) { left: 20%; animation-delay: 2s; }
-        .bg-animation span:nth-child(3) { left: 30%; animation-delay: 4s; }
-        .bg-animation span:nth-child(4) { left: 40%; animation-delay: 6s; }
-        .bg-animation span:nth-child(5) { left: 50%; animation-delay: 8s; }
-        .bg-animation span:nth-child(6) { left: 60%; animation-delay: 10s; }
-        .bg-animation span:nth-child(7) { left: 70%; animation-delay: 12s; }
-        .bg-animation span:nth-child(8) { left: 80%; animation-delay: 14s; }
-        .bg-animation span:nth-child(9) { left: 90%; animation-delay: 16s; }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(100vh) scale(0);
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) scale(1);
-            }
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
         }
 
         /* Header */
         header {
             padding: 2rem;
             text-align: center;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            animation: slideDown 0.5s ease;
+            position: relative;
         }
 
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .logo {
-            font-size: 3rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .logo-3d {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ffffff, #888888);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
-            letter-spacing: 2px;
+            text-shadow: 0 10px 30px rgba(255,255,255,0.3);
+            transform: perspective(500px) rotateX(10deg);
+            animation: float 3s ease-in-out infinite;
+            letter-spacing: 5px;
         }
 
-        .tagline {
-            margin-top: 0.5rem;
-            color: #a0a0a0;
-            font-size: 1rem;
+        @keyframes float {
+            0%, 100% { transform: perspective(500px) rotateX(10deg) translateY(0); }
+            50% { transform: perspective(500px) rotateX(10deg) translateY(-10px); }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #aaa;
+            margin-top: 1rem;
+            letter-spacing: 2px;
         }
 
         /* Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 2rem;
         }
 
         /* Glass Card */
         .glass-card {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(10px);
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 3rem;
             margin: 2rem 0;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
-            animation: fadeInUp 0.6s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .glass-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 48px rgba(102, 126, 234, 0.3);
-            border-color: rgba(102, 126, 234, 0.3);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         /* Download Section */
@@ -146,61 +107,46 @@
         }
 
         .download-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
+            color: #000;
             border: none;
             padding: 1.5rem 4rem;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: 700;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
             position: relative;
             overflow: hidden;
-            text-decoration: none;
-            display: inline-block;
+            margin: 2rem 0;
         }
 
-        .download-btn:before {
+        .download-btn::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: 0.5s;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
         }
 
-        .download-btn:hover:before {
-            left: 100%;
+        .download-btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .download-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.5);
         }
 
         .download-btn:active {
             transform: scale(0.98);
-        }
-
-        .copy-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 0.8rem 2rem;
-            border-radius: 30px;
-            cursor: pointer;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        .copy-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.05);
         }
 
         /* Features Grid */
@@ -211,9 +157,8 @@
             margin: 3rem 0;
         }
 
-        .feature-card {
+        .feature-item {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             padding: 2rem;
@@ -222,10 +167,10 @@
             cursor: pointer;
         }
 
-        .feature-card:hover {
-            background: rgba(102, 126, 234, 0.1);
-            border-color: rgba(102, 126, 234, 0.3);
-            transform: translateY(-10px);
+        .feature-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .feature-icon {
@@ -237,11 +182,10 @@
             font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            color: #667eea;
         }
 
         .feature-desc {
-            color: #a0a0a0;
+            color: #aaa;
             font-size: 0.9rem;
         }
 
@@ -250,26 +194,25 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
-            margin-top: 2rem;
+            margin: 2rem 0;
         }
 
         .api-card {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-            border: 1px solid rgba(102, 126, 234, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 15px;
             padding: 1.5rem;
             transition: all 0.3s ease;
         }
 
         .api-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .api-name {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #667eea;
             margin-bottom: 1rem;
         }
 
@@ -279,318 +222,254 @@
             gap: 0.5rem;
         }
 
-        .stat {
-            display: flex;
-            justify-content: space-between;
+        .stat-bar {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
             padding: 0.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        /* Info Section */
+        .info-section {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-label {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-value {
+            font-size: 1.5rem;
+            font-weight: 700;
         }
 
         /* Social Links */
-        .social-section {
-            text-align: center;
-            margin: 3rem 0;
-        }
-
         .social-links {
             display: flex;
             justify-content: center;
             gap: 2rem;
-            margin-top: 2rem;
+            margin: 3rem 0;
             flex-wrap: wrap;
         }
 
         .social-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 1rem 2rem;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 1rem 2rem;
             border-radius: 50px;
-            color: white;
             text-decoration: none;
-            transition: all 0.3s ease;
+            font-size: 1.1rem;
             font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .social-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: scale(1.1);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-        }
-
-        .social-btn.youtube {
-            border-color: #FF0000;
-        }
-
-        .social-btn.youtube:hover {
-            background: rgba(255, 0, 0, 0.2);
-        }
-
-        .social-btn.discord {
-            border-color: #5865F2;
-        }
-
-        .social-btn.discord:hover {
-            background: rgba(88, 101, 242, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
         }
 
         /* Footer */
         footer {
             text-align: center;
             padding: 2rem;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
+            color: #666;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 3rem;
+            margin-top: 4rem;
         }
 
-        .version-info {
-            color: #a0a0a0;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
-            opacity: 0;
-            transform: translateY(100px);
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .toast.show {
-            opacity: 1;
-            transform: translateY(0);
+        /* Section Titles */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, #ffffff, #888888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .logo {
-                font-size: 2rem;
-            }
-
-            .glass-card {
-                padding: 2rem 1.5rem;
+            .logo-3d {
+                font-size: 2.5rem;
             }
 
             .download-btn {
-                padding: 1.2rem 2.5rem;
-                font-size: 1.1rem;
+                padding: 1rem 2rem;
+                font-size: 1.2rem;
             }
 
-            .features-grid, .api-grid {
-                grid-template-columns: 1fr;
+            .glass-card {
+                padding: 1.5rem;
             }
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-align: center;
-        }
-
-        .link-display {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 1rem;
-            border-radius: 10px;
-            margin: 1rem 0;
-            word-break: break-all;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            color: #a0a0a0;
         }
     </style>
 </head>
 <body>
-    <!-- Background Animation -->
-    <div class="bg-animation">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
+    <div class="background-animation"></div>
 
-    <!-- Header -->
     <header>
-        <h1 class="logo">KS EXECUTOR</h1>
-        <p class="tagline">Premium Roblox Script Executor</p>
+        <h1 class="logo-3d">KS EXECUTOR</h1>
+        <p class="subtitle">Premium Roblox Script Executor</p>
     </header>
 
-    <!-- Main Container -->
     <div class="container">
         <!-- Download Section -->
         <div class="glass-card download-section">
-            <h2>🚀 Download Now</h2>
-            <p style="color: #a0a0a0; margin-bottom: 2rem; font-size: 1.1rem;">
-                Experience the most powerful and reliable Roblox executor
+            <h2 class="section-title">Download Now</h2>
+            <p style="font-size: 1.2rem; color: #aaa; margin-bottom: 2rem;">
+                The most powerful and reliable Roblox executor
             </p>
-            <a href="https://github.com/kgycoder/Download/raw/main/KS%20v2.zip" class="download-btn">
-                ⬇️ DOWNLOAD KS EXECUTOR
-            </a>
-            <div class="link-display">
-                https://github.com/kgycoder/Download/raw/main/KS%20v2.zip
+            <button class="download-btn" onclick="window.location.href='https://github.com/kgycoder/Download/raw/main/KS%20v2.zip'">
+                ⬇ DOWNLOAD KS EXECUTOR
+            </button>
+            
+            <div class="info-section">
+                <div class="info-item">
+                    <div class="info-label">Version</div>
+                    <div class="info-value">2.01</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Latest Update</div>
+                    <div class="info-value">2026.02.21</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Developer</div>
+                    <div class="info-value">Team KS</div>
+                </div>
             </div>
-            <button class="copy-btn" onclick="copyLink()">📋 Copy Download Link</button>
         </div>
 
         <!-- Features Section -->
         <div class="glass-card">
-            <h2>✨ Premium Features</h2>
+            <h2 class="section-title">Key Features</h2>
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🆓</div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎯</div>
                     <div class="feature-title">100% Free</div>
-                    <div class="feature-desc">Completely free executor with no hidden costs</div>
+                    <div class="feature-desc">Completely free to use with no hidden costs</div>
                 </div>
-                <div class="feature-card">
+                <div class="feature-item">
                     <div class="feature-icon">⚡</div>
                     <div class="feature-title">Fast Execution</div>
                     <div class="feature-desc">Lightning-fast script execution speed</div>
                 </div>
-                <div class="feature-card">
+                <div class="feature-item">
                     <div class="feature-icon">🔄</div>
                     <div class="feature-title">Auto Update</div>
                     <div class="feature-desc">Automatic updates for the latest features</div>
                 </div>
-                <div class="feature-card">
+                <div class="feature-item">
                     <div class="feature-icon">🛡️</div>
                     <div class="feature-title">Anti-Cheat Bypass</div>
-                    <div class="feature-desc">Advanced anti-cheat detection bypass</div>
+                    <div class="feature-desc">Advanced anti-detection technology</div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔧</div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔌</div>
                     <div class="feature-title">Multi-API Support</div>
-                    <div class="feature-desc">Compatible with multiple API systems</div>
+                    <div class="feature-desc">Supports multiple execution APIs</div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <div class="feature-title">User Friendly</div>
-                    <div class="feature-desc">Intuitive and easy-to-use interface</div>
+                <div class="feature-item">
+                    <div class="feature-icon">💎</div>
+                    <div class="feature-title">Premium Quality</div>
+                    <div class="feature-desc">Professional-grade executor</div>
                 </div>
             </div>
         </div>
 
         <!-- API Support Section -->
         <div class="glass-card">
-            <h2>🔌 Supported APIs</h2>
+            <h2 class="section-title">Supported APIs</h2>
             <div class="api-grid">
                 <div class="api-card">
-                    <div class="api-name">Velocity API</div>
+                    <div class="api-name">🚀 Velocity</div>
                     <div class="api-stats">
-                        <div class="stat">
-                            <span>Level:</span>
-                            <span style="color: #667eea; font-weight: 700;">8</span>
-                        </div>
-                        <div class="stat">
-                            <span>SUNC:</span>
-                            <span style="color: #4ade80; font-weight: 700;">94%</span>
-                        </div>
-                        <div class="stat">
-                            <span>UNC:</span>
-                            <span style="color: #4ade80; font-weight: 700;">99%</span>
-                        </div>
+                        <div class="stat-bar">Level: 8</div>
+                        <div class="stat-bar">SUNC: 94%</div>
+                        <div class="stat-bar">UNC: 99%</div>
                     </div>
                 </div>
                 <div class="api-card">
-                    <div class="api-name">Xeno API</div>
+                    <div class="api-name">⚡ Xeno</div>
                     <div class="api-stats">
-                        <div class="stat">
-                            <span>Level:</span>
-                            <span style="color: #667eea; font-weight: 700;">3</span>
-                        </div>
-                        <div class="stat">
-                            <span>UNC:</span>
-                            <span style="color: #fbbf24; font-weight: 700;">82%</span>
-                        </div>
+                        <div class="stat-bar">Level: 3</div>
+                        <div class="stat-bar">UNC: 82%</div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Social Links -->
-        <div class="glass-card social-section">
-            <h2>🌐 Join Our Community</h2>
-            <p style="color: #a0a0a0; margin-bottom: 1rem;">
-                Stay updated with the latest scripts and updates
-            </p>
+        <div class="glass-card">
+            <h2 class="section-title">Connect With Us</h2>
             <div class="social-links">
-                <a href="https://www.youtube.com/@ks_script" target="_blank" class="social-btn youtube">
-                    <span style="font-size: 1.5rem;">🎥</span>
-                    <span>YouTube Channel</span>
+                <a href="https://www.youtube.com/@ks_script" target="_blank" class="social-btn">
+                    📺 YouTube
                 </a>
-                <a href="https://discord.gg/6JtrVMsg" target="_blank" class="social-btn discord">
-                    <span style="font-size: 1.5rem;">💬</span>
-                    <span>Discord Server</span>
+                <a href="https://discord.gg/6JtrVMsg" target="_blank" class="social-btn">
+                    💬 Discord
                 </a>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
-        <div class="version-info">Made by Team KS</div>
-        <div class="version-info">Version: 2.01 | Latest Update: 2026.02.21</div>
-        <div style="margin-top: 1rem; color: #667eea; font-weight: 600;">
-            © 2026 KS Executor. All rights reserved.
-        </div>
+        <p>&copy; 2026 KS EXECUTOR. Made by Team KS. All rights reserved.</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">For educational purposes only.</p>
     </footer>
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">Link copied to clipboard! ✓</div>
-
     <script>
-        // Copy Link Function
-        function copyLink() {
-            const link = "https://github.com/kgycoder/Download/raw/main/KS%20v2.zip";
-            navigator.clipboard.writeText(link).then(() => {
-                showToast();
-            });
-        }
+        // Add smooth scroll animations
+        const cards = document.querySelectorAll('.glass-card');
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
 
-        // Show Toast Notification
-        function showToast() {
-            const toast = document.getElementById('toast');
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-
-        // Add scroll animation
-        const cards = document.querySelectorAll('.glass-card, .feature-card, .api-card');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.style.opacity = '0';
+                    entry.target.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        entry.target.style.transition = 'all 0.6s ease';
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, 100);
                 }
             });
-        }, { threshold: 0.1 });
+        }, observerOptions);
 
         cards.forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'all 0.6s ease';
             observer.observe(card);
+        });
+
+        // Add particle effect on button hover
+        const downloadBtn = document.querySelector('.download-btn');
+        downloadBtn.addEventListener('mousemove', (e) => {
+            const rect = downloadBtn.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            downloadBtn.style.setProperty('--x', x + 'px');
+            downloadBtn.style.setProperty('--y', y + 'px');
         });
     </script>
 </body>
